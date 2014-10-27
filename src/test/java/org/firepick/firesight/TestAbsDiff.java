@@ -23,7 +23,7 @@ public class TestAbsDiff {
 		HashMap<String, String> argMap = new HashMap<String, String>();
 		argMap.put("img", "src/test/resources/mog2.jpg");
 		String result = FireSight.process(image, op, argMap);
-		ImageIO.write(image, "png", new File("output.png"));
+		ImageIO.write(image, "png", new File("testAbsDiff.png"));
 		log.info("Result: " + result);
 	}
 }
