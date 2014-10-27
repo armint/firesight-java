@@ -16,9 +16,9 @@
 
 using namespace firesight;
 JNIEXPORT jstring JNICALL Java_org_firepick_firesight_FireSight_process(JNIEnv *env, jclass, jlong nativeMat,
-		jstring json) {
+		jstring json, jobjectArray argNames, jobjectArray argValues) {
 
-	const char *str = env->GetStringUTFChars(json, 0);
+	const char *str = env->GetStringUTFChars(json, NULL);
 
 	Pipeline pipeline(str);
 
@@ -26,6 +26,22 @@ JNIEXPORT jstring JNICALL Java_org_firepick_firesight_FireSight_process(JNIEnv *
 
 	//Create an argMap.  Can be empty.
 	ArgMap argMap;
+	if (argNames != NULL) {
+		if (argValues == NULL) {
+			 env->ThrowNew(env->FindClass("java/lang/IllegalArgumentException"), "argNames and argValues should have equal sizes!");
+			 return NULL;
+		}
+		jsize len = env->GetArrayLength(argNames);
+		if (env->GetArrayLength(argValues) != len) {
+			 env->ThrowNew(env->FindClass("java/lang/IllegalArgumentException"), "argNames and argValues should have equal sizes!");
+			 return NULL;
+		}
+		for (int i = 0; i < len ; i++) {
+			const char* argName = env->GetStringUTFChars((jstring)env->GetObjectArrayElement(argNames, i), NULL);
+			const char* argValue = env->GetStringUTFChars((jstring)env->GetObjectArrayElement(argValues, i), NULL);
+			argMap[argName] = argValue;
+		}
+	}
 
 	//Process the pipeline
 	json_t *pModel = pipeline.process(*image, argMap);

@@ -10,10 +10,10 @@ extern "C" {
 /*
  * Class:     org_firepick_firesight_FireSight
  * Method:    process
- * Signature: (JLjava/lang/String;)Ljava/lang/String;
+ * Signature: (JLjava/lang/String;[Ljava/lang/String;[Ljava/lang/String;)Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_org_firepick_firesight_FireSight_process
-  (JNIEnv *, jclass, jlong, jstring);
+  (JNIEnv *, jclass, jlong, jstring, jobjectArray, jobjectArray);
 
 #ifdef __cplusplus
 }
