@@ -14,9 +14,12 @@ public class FireSight {
     }
     
 	/**
-	 * @param image
-	 * @param json
-	 * @return
+	 * Process a buffered image based on a json description
+	 *  
+	 * @param image the image to process. The original image will be overwritten with the processed one
+	 * @param json the processing description
+	 * 
+	 * @return json status information from FireSight
 	 */
 	public static String process(BufferedImage image, String json) {
 		Mat mat = OpenCvUtils.toMat(image);
