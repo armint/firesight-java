@@ -50,7 +50,7 @@
 									<listOptionValue builtIn="false" value="_firesight"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.1473796255" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="/home/armin/dev/firepick/workspace/FireSight/target"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FireSight/target}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.109517933" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
