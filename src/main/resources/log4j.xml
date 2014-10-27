@@ -4,7 +4,7 @@
 <log4j:configuration debug="false" xmlns:log4j="http://jakarta.apache.org/log4j/">
 
 	<appender name="logfile" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="&logdir;/heatmatcher.log" />
+		<param name="File" value="&logdir;/firesight.log" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd" />
 		<param name="Append" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
