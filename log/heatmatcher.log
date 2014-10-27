@@ -1,0 +1,3 @@
+2014-10-27 14:20:22,963  INFO [main] Result: {
+   "s1":{}
+} -- at org.firepick.firesight.TestPipelineAccess.main(TestPipelineAccess.java:25)
