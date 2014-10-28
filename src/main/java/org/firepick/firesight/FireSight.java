@@ -12,16 +12,18 @@ import org.opencv.core.Mat;
 
 public class FireSight {
 	private final static String[] LIBS = new String[] { "zbar", "_firesight", "firesight-java" };
-    static {
+	static {
 		OpenCV.loadShared();
-    	SharedLibLoader.loadLibraries(LIBS);
-    }
-    
+		SharedLibLoader.loadLibraries(LIBS);
+	}
+
 	/**
 	 * Process a buffered image based on a json description
-	 *  
-	 * @param image the image to process. The original image will be overwritten with the processed one
-	 * @param json the processing description
+	 * 
+	 * @param image
+	 *            the image to process. The original image will be overwritten with the processed one
+	 * @param json
+	 *            the processing description
 	 * 
 	 * @return json status information from FireSight
 	 */
@@ -29,6 +31,18 @@ public class FireSight {
 		return process(image, json, null);
 	}
 
+	/**
+	 * Process a buffered image based on a json description
+	 * 
+	 * @param image
+	 *            the image to process. The original image will be overwritten with the processed one
+	 * @param json
+	 *            the processing description
+	 * @param argMap
+	 *            a map with additional arguments for FireSight
+	 * 
+	 * @return json status information from FireSight
+	 */
 	public static String process(BufferedImage image, String json, Map<String, String> argMap) {
 		Mat mat = OpenCvUtils.toMat(image);
 		String[] argNames = null;
@@ -47,6 +61,6 @@ public class FireSight {
 		mat.get(0, 0, ((DataBufferByte) image.getRaster().getDataBuffer()).getData());
 		return result;
 	}
-	
+
 	protected static native String process(long nativeMat, String json, String[] argNames, String[] argValues);
 }
