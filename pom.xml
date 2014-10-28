@@ -22,14 +22,7 @@
 			<version>1.2.17</version>
 			<type>jar</type>
 		</dependency>
-<!--
- 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.14.8</version>
-		</dependency>
- -->
- 	</dependencies>
+	</dependencies>
 	<build>
 		<plugins>
 			<!-- Used to specify that the Maven Eclipse task should download sources 

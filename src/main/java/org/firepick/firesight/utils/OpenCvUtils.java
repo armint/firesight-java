@@ -1,4 +1,4 @@
-package org.firepick.firesight;
+package org.firepick.firesight.utils;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

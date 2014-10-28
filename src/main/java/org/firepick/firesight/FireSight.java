@@ -4,14 +4,17 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.util.Map;
 
+import nu.pattern.OpenCV;
+
+import org.firepick.firesight.utils.OpenCvUtils;
+import org.firepick.firesight.utils.SharedLibLoader;
 import org.opencv.core.Mat;
 
 public class FireSight {
+	private final static String[] LIBS = new String[] { "zbar", "_firesight", "firesight-java" };
     static {
-        nu.pattern.OpenCV.loadShared();
-        System.loadLibrary("_firesight");
-        System.loadLibrary("firesight-java");
- 
+		OpenCV.loadShared();
+    	SharedLibLoader.loadLibraries(LIBS);
     }
     
 	/**
