@@ -12,11 +12,33 @@ import org.apache.log4j.Logger;
 
 public class SharedLibLoader {
 
+	private static final SharedLibLoader SHARED_LIB_LOADER = new SharedLibLoader();
+
 	private static final Logger log = Logger.getLogger(SharedLibLoader.class);
 
 	private String prefix;
 	private String postfix;
 	private String path;
+
+	public static void loadLibraries(String... libraries) {
+		SHARED_LIB_LOADER.loadLibs(libraries);
+	}
+
+	public static String getOSName() {
+		return System.getProperty("os.name");
+	}
+
+	public static String getOSArch() {
+		return System.getProperty("os.arch");
+	}
+
+	public static boolean isOSWindows() {
+		return getOSName().toLowerCase().startsWith("windows");
+	}
+
+	public static boolean isOSMacOSX() {
+		return getOSName().equals("Mac OS X");
+	}
 
 	private SharedLibLoader() {
 	}
@@ -28,10 +50,6 @@ public class SharedLibLoader {
 
 	private String getFullLibraryName(String baseName) {
 		return prefix + baseName + postfix;
-	}
-
-	public static void loadLibraries(String... libraries) {
-		new SharedLibLoader().loadLibs(libraries);
 	}
 
 	private void loadLibs(String[] libraries) {
@@ -83,22 +101,6 @@ public class SharedLibLoader {
 
 	}
 
-	public static String getOSName() {
-		return System.getProperty("os.name");
-	}
-
-	public static String getOSArch() {
-		return System.getProperty("os.arch");
-	}
-
-	public static boolean isOSWindows() {
-		return getOSName().toLowerCase().startsWith("windows");
-	}
-
-	public static boolean isOSMacOSX() {
-		return getOSName().equals("Mac OS X");
-	}
-
 	private Path extractShared(String lib, Path targetDir) {
 		log.trace("Extracting " + getFullLibraryPath(lib) + " to " + targetDir);
 		final InputStream binary = SharedLibLoader.class.getResourceAsStream(getFullLibraryPath(lib));
@@ -125,7 +127,7 @@ public class SharedLibLoader {
 	 * @param pathToAdd
 	 *            the path to add
 	 */
-	public static void addLibraryPath(String pathToAdd) {
+	private static void addLibraryPath(String pathToAdd) {
 		try {
 			final Field usrPathsField = ClassLoader.class.getDeclaredField("usr_paths");
 			usrPathsField.setAccessible(true);
