@@ -84,17 +84,17 @@ public class SharedLibLoader {
 	}
 
 	private void configureOS() {
+		prefix = "lib";
 		if (isOSWindows()) {
 			path = "windows";
-			prefix = "lib";
 			postfix = ".dll";
 		} else {
-			prefix = "lib";
-			postfix = ".so";
 			if (isOSMacOSX()) {
 				path = "macosx";
+				postfix = ".dylib";
 			} else {
 				path = getOSName().toLowerCase();
+				postfix = ".so";
 			}
 		}
 		path += File.separatorChar + getOSArch();
