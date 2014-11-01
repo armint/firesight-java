@@ -36,6 +36,7 @@ JNIEXPORT jstring JNICALL Java_org_firepick_firesight_FireSight_process(JNIEnv *
 			 env->ThrowNew(env->FindClass("java/lang/IllegalArgumentException"), "argNames and argValues should have equal sizes!");
 			 return NULL;
 		}
+		// TODO save all pointers to strings so we can free them later
 		for (int i = 0; i < len ; i++) {
 			const char* argName = env->GetStringUTFChars((jstring)env->GetObjectArrayElement(argNames, i), NULL);
 			const char* argValue = env->GetStringUTFChars((jstring)env->GetObjectArrayElement(argValues, i), NULL);
