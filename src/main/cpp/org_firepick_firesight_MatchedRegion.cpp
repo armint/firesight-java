@@ -15,14 +15,6 @@
 #include <cstdio>
 
 using namespace firesight;
-JNIEXPORT void JNICALL Java_org_firepick_firesight_MatchedRegion_fillFromNative(JNIEnv *env, jobject javaObject,
-		jlong nativeObject) {
-	jclass clsObj = env->GetObjectClass(javaObject);
-	if (clsObj == NULL) {
-		env->ThrowNew(env->FindClass("java/lang/IllegalStateException"), "Can't call fillFromNative on null!");
-	}
-//	   env->GetFieldID(clsObj, );
-}
 
 JNIEXPORT jlong JNICALL Java_org_firepick_firesight_MatchedRegion_createNative(JNIEnv *, jclass, jint xRangeStart,
 		jint xRangeEnd, jint yRangeStart, jint yRangeEnd, jdouble averageX, jdouble averageY, jint pointCount,
@@ -38,3 +30,47 @@ JNIEXPORT void JNICALL Java_org_firepick_firesight_MatchedRegion_releaseNative(J
 	delete (MatchedRegion*) nativeObject;
 }
 
+JNIEXPORT jintArray JNICALL Java_org_firepick_firesight_MatchedRegion_getXRangeFromNative(JNIEnv * env, jclass,
+		jlong nativeObject) {
+	MatchedRegion* region = (MatchedRegion*) nativeObject;
+	jintArray result = env->NewIntArray(2);
+	jint* resultVals = env->GetIntArrayElements(result, 0);
+	resultVals[0] = region->xRange.start;
+	resultVals[1] = region->xRange.end;
+	env->ReleaseIntArrayElements(result, resultVals, 0);
+	return result;
+}
+
+JNIEXPORT jintArray JNICALL Java_org_firepick_firesight_MatchedRegion_getYRangeFromNative(JNIEnv * env, jclass,
+		jlong nativeObject) {
+	MatchedRegion* region = (MatchedRegion*) nativeObject;
+	jintArray result = env->NewIntArray(2);
+	jint* resultVals = env->GetIntArrayElements(result, 0);
+	resultVals[0] = region->yRange.start;
+	resultVals[1] = region->yRange.end;
+	env->ReleaseIntArrayElements(result, resultVals, 0);
+	return result;
+}
+
+JNIEXPORT jdoubleArray JNICALL Java_org_firepick_firesight_MatchedRegion_getAverageFromNative(JNIEnv * env, jclass,
+		jlong nativeObject) {
+	MatchedRegion* region = (MatchedRegion*) nativeObject;
+	jdoubleArray result = env->NewDoubleArray(2);
+	jdouble* resultVals = env->GetDoubleArrayElements(result, 0);
+	resultVals[0] = region->average.x;
+	resultVals[1] = region->average.y;
+	env->ReleaseDoubleArrayElements(result, resultVals, 0);
+	return result;
+}
+
+JNIEXPORT jint JNICALL Java_org_firepick_firesight_MatchedRegion_getPointCountFromNative(JNIEnv *, jclass,
+		jlong nativeObject) {
+	MatchedRegion* region = (MatchedRegion*) nativeObject;
+	return region->pointCount;
+}
+
+JNIEXPORT jdouble JNICALL Java_org_firepick_firesight_MatchedRegion_getCovarFromNative(JNIEnv *, jclass,
+		jlong nativeObject) {
+	MatchedRegion* region = (MatchedRegion*) nativeObject;
+	return region->covar;
+}

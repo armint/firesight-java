@@ -9,14 +9,6 @@ extern "C" {
 #endif
 /*
  * Class:     org_firepick_firesight_MatchedRegion
- * Method:    fillFromNative
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_org_firepick_firesight_MatchedRegion_fillFromNative
-  (JNIEnv *, jobject, jlong);
-
-/*
- * Class:     org_firepick_firesight_MatchedRegion
  * Method:    createNative
  * Signature: (IIIIDDIF)J
  */
@@ -29,6 +21,46 @@ JNIEXPORT jlong JNICALL Java_org_firepick_firesight_MatchedRegion_createNative
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_org_firepick_firesight_MatchedRegion_releaseNative
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     org_firepick_firesight_MatchedRegion
+ * Method:    getXRangeFromNative
+ * Signature: (J)[I
+ */
+JNIEXPORT jintArray JNICALL Java_org_firepick_firesight_MatchedRegion_getXRangeFromNative
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     org_firepick_firesight_MatchedRegion
+ * Method:    getYRangeFromNative
+ * Signature: (J)[I
+ */
+JNIEXPORT jintArray JNICALL Java_org_firepick_firesight_MatchedRegion_getYRangeFromNative
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     org_firepick_firesight_MatchedRegion
+ * Method:    getAverageFromNative
+ * Signature: (J)[D
+ */
+JNIEXPORT jdoubleArray JNICALL Java_org_firepick_firesight_MatchedRegion_getAverageFromNative
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     org_firepick_firesight_MatchedRegion
+ * Method:    getPointCountFromNative
+ * Signature: (J)I
+ */
+JNIEXPORT jint JNICALL Java_org_firepick_firesight_MatchedRegion_getPointCountFromNative
+  (JNIEnv *, jclass, jlong);
+
+/*
+ * Class:     org_firepick_firesight_MatchedRegion
+ * Method:    getCovarFromNative
+ * Signature: (J)D
+ */
+JNIEXPORT jdouble JNICALL Java_org_firepick_firesight_MatchedRegion_getCovarFromNative
   (JNIEnv *, jclass, jlong);
 
 #ifdef __cplusplus

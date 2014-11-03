@@ -1,5 +1,6 @@
 package org.firepick.firesight;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.opencv.core.Mat;
@@ -15,11 +16,17 @@ public class HoleRecognizer {
 		_showMatches(nativeObject, show);
 	}
 
-	public void scan(Mat matRGB, Collection<MatchedRegion> matches) {
-		scan(matRGB, matches, 1.05f, 2.0f);
+	public Collection<MatchedRegion> scan(Mat matRGB) {
+		return scan(matRGB, 1.05f, 2.0f);
 	}
 
-	public void scan(Mat matRGB, Collection<MatchedRegion> matches, float maxEllipse, float maxCovar) {
+	public Collection<MatchedRegion> scan(Mat matRGB, float maxEllipse, float maxCovar) {
+		long[] scan = scan(nativeObject, matRGB.nativeObj, maxEllipse, maxCovar);
+		ArrayList<MatchedRegion> matches = new ArrayList<MatchedRegion>(scan.length);
+		for (int i = 0; i < scan.length; i++) {
+			matches.add(MatchedRegion.fromNative(scan[i]));
+		}
+		return matches;
 
 	}
 
@@ -42,4 +49,5 @@ public class HoleRecognizer {
 
 	private static native void _showMatches(long nativeObject, int show);
 
+	private static native long[] scan(long nativeObject, long nativeMat, float maxEllipse, float maxCovar);
 }
