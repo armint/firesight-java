@@ -25,6 +25,7 @@ public class HoleRecognizer {
 		ArrayList<MatchedRegion> matches = new ArrayList<MatchedRegion>(scan.length);
 		for (int i = 0; i < scan.length; i++) {
 			matches.add(MatchedRegion.fromNative(scan[i]));
+			MatchedRegion.releaseNative(scan[i]);
 		}
 		return matches;
 
