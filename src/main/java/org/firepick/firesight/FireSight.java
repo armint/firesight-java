@@ -59,6 +59,7 @@ public class FireSight {
 		}
 		String result = process(mat.nativeObj, json, argNames, argValues);
 		mat.get(0, 0, ((DataBufferByte) image.getRaster().getDataBuffer()).getData());
+		mat.release();
 		return result;
 	}
 
