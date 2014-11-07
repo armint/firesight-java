@@ -1,8 +1,11 @@
 package org.firepick.firesight;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.firepick.firesight.utils.OpenCvUtils;
 import org.opencv.core.Mat;
 
 public class HoughCircle extends NativeObject {
@@ -11,6 +14,14 @@ public class HoughCircle extends NativeObject {
 		init(minDiameter, maxDiameter);
 	}
 
+	public Collection<Circle> scan(BufferedImage image) {
+		Mat mat = OpenCvUtils.toMat(image);
+		Circle[] scan = scan(mat.nativeObj);
+		mat.get(0, 0, ((DataBufferByte) image.getRaster().getDataBuffer()).getData());
+		mat.release();
+		return Arrays.asList(scan);
+	}
+	
 	public Collection<Circle> scan(Mat matRGB) {
 		Circle[] scan = scan(matRGB.nativeObj);
 		return Arrays.asList(scan);

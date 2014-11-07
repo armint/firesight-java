@@ -1,8 +1,11 @@
 package org.firepick.firesight;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.firepick.firesight.utils.OpenCvUtils;
 import org.opencv.core.Mat;
 
 public class HoleRecognizer extends NativeObject {
@@ -17,6 +20,18 @@ public class HoleRecognizer extends NativeObject {
 
 	public Collection<MatchedRegion> scan(Mat matRGB) {
 		return scan(matRGB, 1.05f, 2.0f);
+	}
+
+	public Collection<MatchedRegion> scan(BufferedImage image) {
+		return scan(image, 1.05f, 2.0f);
+	}
+
+	public Collection<MatchedRegion> scan(BufferedImage image, float maxEllipse, float maxCovar) {
+		Mat mat = OpenCvUtils.toMat(image);
+		Collection<MatchedRegion> matches = scan(mat, maxEllipse, maxCovar);
+		mat.get(0, 0, ((DataBufferByte) image.getRaster().getDataBuffer()).getData());
+		mat.release();
+		return matches;
 	}
 
 	public Collection<MatchedRegion> scan(Mat matRGB, float maxEllipse, float maxCovar) {
