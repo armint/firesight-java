@@ -9,19 +9,19 @@ extern "C" {
 #endif
 /*
  * Class:     org_firepick_firesight_HoleRecognizer
- * Method:    release
- * Signature: (J)V
+ * Method:    dispose
+ * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_org_firepick_firesight_HoleRecognizer_release
-  (JNIEnv *, jclass, jlong);
+JNIEXPORT void JNICALL Java_org_firepick_firesight_HoleRecognizer_dispose
+  (JNIEnv *, jobject);
 
 /*
  * Class:     org_firepick_firesight_HoleRecognizer
  * Method:    init
- * Signature: (FF)J
+ * Signature: (FF)V
  */
-JNIEXPORT jlong JNICALL Java_org_firepick_firesight_HoleRecognizer_init
-  (JNIEnv *, jclass, jfloat, jfloat);
+JNIEXPORT void JNICALL Java_org_firepick_firesight_HoleRecognizer_init
+  (JNIEnv *, jobject, jfloat, jfloat);
 
 /*
  * Class:     org_firepick_firesight_HoleRecognizer
@@ -29,7 +29,7 @@ JNIEXPORT jlong JNICALL Java_org_firepick_firesight_HoleRecognizer_init
  * Signature: (JI)V
  */
 JNIEXPORT void JNICALL Java_org_firepick_firesight_HoleRecognizer__1showMatches
-  (JNIEnv *, jclass, jlong, jint);
+  (JNIEnv *, jobject, jlong, jint);
 
 /*
  * Class:     org_firepick_firesight_HoleRecognizer
@@ -37,7 +37,7 @@ JNIEXPORT void JNICALL Java_org_firepick_firesight_HoleRecognizer__1showMatches
  * Signature: (JJFF)[J
  */
 JNIEXPORT jlongArray JNICALL Java_org_firepick_firesight_HoleRecognizer_scan
-  (JNIEnv *, jclass, jlong, jlong, jfloat, jfloat);
+  (JNIEnv *, jobject, jlong, jlong, jfloat, jfloat);
 
 #ifdef __cplusplus
 }

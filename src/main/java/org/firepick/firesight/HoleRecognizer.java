@@ -5,11 +5,10 @@ import java.util.Collection;
 
 import org.opencv.core.Mat;
 
-public class HoleRecognizer {
-	protected long nativeObject;
+public class HoleRecognizer extends NativeObject {
 
 	public HoleRecognizer(float minDiameter, float maxDiameter) {
-		nativeObject = init(minDiameter, maxDiameter);
+		init(minDiameter, maxDiameter);
 	}
 
 	public void showMatches(int show) {
@@ -39,16 +38,11 @@ public class HoleRecognizer {
 		}
 	}
 
-	public void dispose() {
-		release(nativeObject);
-		nativeObject = 0;
-	}
+	public native void dispose();
 
-	public static native void release(long nativeObject);
+	protected native void init(float minDiameter, float maxDiameter);
 
-	private static native long init(float minDiameter, float maxDiameter);
+	protected native void _showMatches(long nativeObject, int show);
 
-	private static native void _showMatches(long nativeObject, int show);
-
-	private static native long[] scan(long nativeObject, long nativeMat, float maxEllipse, float maxCovar);
+	protected native long[] scan(long nativeObject, long nativeMat, float maxEllipse, float maxCovar);
 }

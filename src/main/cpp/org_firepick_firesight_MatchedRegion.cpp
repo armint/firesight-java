@@ -12,7 +12,6 @@
 #include <jni_md.h>
 #include <opencv2/core/core.hpp>
 #include <opencv2/core/operations.hpp>
-#include <cstdio>
 
 using namespace firesight;
 
