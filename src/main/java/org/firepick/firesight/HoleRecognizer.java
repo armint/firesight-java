@@ -15,7 +15,7 @@ public class HoleRecognizer extends NativeObject {
 	}
 
 	public void showMatches(int show) {
-		_showMatches(nativeObject, show);
+		_showMatches(show);
 	}
 
 	public Collection<MatchedRegion> scan(Mat matRGB) {
@@ -35,7 +35,7 @@ public class HoleRecognizer extends NativeObject {
 	}
 
 	public Collection<MatchedRegion> scan(Mat matRGB, float maxEllipse, float maxCovar) {
-		long[] scan = scan(nativeObject, matRGB.nativeObj, maxEllipse, maxCovar);
+		long[] scan = scan( matRGB.nativeObj, maxEllipse, maxCovar);
 		ArrayList<MatchedRegion> matches = new ArrayList<MatchedRegion>(scan.length);
 		for (int i = 0; i < scan.length; i++) {
 			matches.add(MatchedRegion.fromNative(scan[i]));
@@ -57,7 +57,7 @@ public class HoleRecognizer extends NativeObject {
 
 	protected native void init(float minDiameter, float maxDiameter);
 
-	protected native void _showMatches(long nativeObject, int show);
+	protected native void _showMatches(int show);
 
-	protected native long[] scan(long nativeObject, long nativeMat, float maxEllipse, float maxCovar);
+	protected native long[] scan(long nativeMat, float maxEllipse, float maxCovar);
 }

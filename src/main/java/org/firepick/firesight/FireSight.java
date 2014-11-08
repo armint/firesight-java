@@ -13,8 +13,16 @@ import org.opencv.core.Mat;
 public class FireSight {
 	private final static String[] LIBS = new String[] { "zbar", "_firesight", "firesight-java" };
 	static {
-		OpenCV.loadShared();
-		SharedLibLoader.loadLibraries(LIBS);
+		FireSight.loadLibraries();
+	}
+	private static boolean libsLoaded = false;
+
+	public static void loadLibraries() {
+		if (!libsLoaded) {
+			OpenCV.loadShared();
+			SharedLibLoader.loadLibraries(LIBS);
+			libsLoaded = true;
+		}
 	}
 
 	/**

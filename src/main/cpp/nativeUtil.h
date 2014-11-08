@@ -12,7 +12,11 @@ template<typename T> T* getNativeObjectPointer(JNIEnv *env, jobject& obj) {
 	jclass clazz = env->GetObjectClass(obj);
 	jfieldID fieldId = env->GetFieldID(clazz, "nativeObject", "J");
 	jlong field = env->GetLongField(obj, fieldId);
-	// TODO check for 0, and throw exception
+	if (field == 0) {
+		env->ThrowNew(env->FindClass("java/lang/IllegalStateException"),
+				"Native object not available (null)");
+		return NULL;
+	}
 	return (T*) field;
 }
 

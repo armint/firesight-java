@@ -56,13 +56,15 @@ JNIEXPORT jstring JNICALL Java_org_firepick_firesight_FireSight_process(JNIEnv *
 	char *pModelStr = json_dumps(pModel, JSON_PRESERVE_ORDER | JSON_COMPACT | JSON_INDENT(3));
 	jstring retval = env->NewStringUTF(pModelStr);
 
-	jsize len = env->GetArrayLength(argNames);
-	std::vector<const char*>::iterator it = pointers.begin();
-	for (int i = 0; i < len; i++) {
-		env->ReleaseStringUTFChars((jstring) env->GetObjectArrayElement(argNames, i * 2), *it);
-		it++;
-		env->ReleaseStringUTFChars((jstring) env->GetObjectArrayElement(argValues, i * 2 + 1), *it);
-		it++;
+	if (argNames != NULL) {
+		jsize len = env->GetArrayLength(argNames);
+		std::vector<const char*>::iterator it = pointers.begin();
+		for (int i = 0; i < len; i++) {
+			env->ReleaseStringUTFChars((jstring) env->GetObjectArrayElement(argNames, i), *it);
+			it++;
+			env->ReleaseStringUTFChars((jstring) env->GetObjectArrayElement(argValues, i), *it);
+			it++;
+		}
 	}
 	free(pModelStr);
 	json_decref(pModel);

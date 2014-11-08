@@ -26,18 +26,18 @@ JNIEXPORT void JNICALL Java_org_firepick_firesight_HoleRecognizer_init
 /*
  * Class:     org_firepick_firesight_HoleRecognizer
  * Method:    _showMatches
- * Signature: (JI)V
+ * Signature: (I)V
  */
 JNIEXPORT void JNICALL Java_org_firepick_firesight_HoleRecognizer__1showMatches
-  (JNIEnv *, jobject, jlong, jint);
+  (JNIEnv *, jobject, jint);
 
 /*
  * Class:     org_firepick_firesight_HoleRecognizer
  * Method:    scan
- * Signature: (JJFF)[J
+ * Signature: (JFF)[J
  */
 JNIEXPORT jlongArray JNICALL Java_org_firepick_firesight_HoleRecognizer_scan
-  (JNIEnv *, jobject, jlong, jlong, jfloat, jfloat);
+  (JNIEnv *, jobject, jlong, jfloat, jfloat);
 
 #ifdef __cplusplus
 }

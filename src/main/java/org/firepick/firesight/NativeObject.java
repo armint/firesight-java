@@ -1,6 +1,9 @@
 package org.firepick.firesight;
 
 public abstract class NativeObject {
+	static {
+		FireSight.loadLibraries();
+	}
 
 	protected long nativeObject;
 	
