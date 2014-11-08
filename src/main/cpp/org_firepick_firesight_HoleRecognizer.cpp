@@ -33,16 +33,16 @@ jobject createRange(JNIEnv *env, int s, int e) {
 	return range;
 }
 
-jobject createPoint(JNIEnv *env, int x, int y) {
+jobject createPoint(JNIEnv *env, double x, double y) {
 	jclass cls = env->FindClass("org/opencv/core/Point");
-	jmethodID constructor = env->GetMethodID(cls, "<init>", "(II)V");
+	jmethodID constructor = env->GetMethodID(cls, "<init>", "(DD)V");
 	jobject point = env->NewObject(cls, constructor, x, y);
 	return point;
 }
 
 jobject createMatchedRegion(JNIEnv *env, jobject& rangeX, jobject& rangeY, jobject& average, int pointCoint, jdouble covar) {
 	jclass cls = env->FindClass("org/firepick/firesight/MatchedRegion");
-	jmethodID constructor = env->GetMethodID(cls, "<init>", "(LLLID)V");
+	jmethodID constructor = env->GetMethodID(cls, "<init>", "(Lorg/opencv/core/Range;Lorg/opencv/core/Range;Lorg/opencv/core/Point;ID)V");
 	jobject matchedRegion = env->NewObject(cls, constructor, rangeX, rangeY, average, pointCoint, covar);
 	return matchedRegion;
 }

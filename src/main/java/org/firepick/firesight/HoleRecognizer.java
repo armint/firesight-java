@@ -2,7 +2,6 @@ package org.firepick.firesight;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -37,11 +36,6 @@ public class HoleRecognizer extends NativeObject {
 
 	public Collection<MatchedRegion> scan(Mat matRGB, float maxEllipse, float maxCovar) {
 		MatchedRegion[] scan = scan(matRGB.nativeObj, maxEllipse, maxCovar);
-//		ArrayList<MatchedRegion> matches = new ArrayList<MatchedRegion>(scan.length);
-//		for (int i = 0; i < scan.length; i++) {
-//			matches.add(MatchedRegion.fromNative(scan[i]));
-//			MatchedRegion.releaseNative(scan[i]);
-//		}
 		return Arrays.asList(scan);
 
 	}
