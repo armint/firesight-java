@@ -75,6 +75,7 @@ public class SharedLibLoader {
 			log.trace("System library loaded for " + libraryName);
 			return true;
 		} catch (final UnsatisfiedLinkError e) {
+			log.trace("library path: " + System.getProperty("java.library.path"));
 			/* Only update the library path and load if the original error indicates it's missing from the library path. */
 			if (!String.format("no %s in java.library.path", libraryName).equals(e.getMessage())) {
 				throw e;
@@ -105,7 +106,7 @@ public class SharedLibLoader {
 		log.trace("Extracting " + getFullLibraryPath(lib) + " to " + targetDir);
 		final InputStream binary = SharedLibLoader.class.getResourceAsStream(getFullLibraryPath(lib));
 		if (binary == null) {
-			throw new IllegalStateException("No libraries available for operating system " + getOSName());
+			throw new IllegalStateException("Library " + lib + " not available for " + getOSName() + "-" + getOSArch());
 		}
 		final Path destination = targetDir.resolve("./" + getFullLibraryName(lib)).normalize();
 

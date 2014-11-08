@@ -28,9 +28,9 @@ JNIEXPORT void JNICALL Java_org_firepick_firesight_HoleRecognizer_dispose(JNIEnv
 JNIEXPORT jlongArray JNICALL Java_org_firepick_firesight_HoleRecognizer_scan(JNIEnv *env, jobject javaObject,
 		jlong nativeMat, jfloat maxEllipse, jfloat maxCovar) {
 	HoleRecognizer* holeRecognizer = getNativeObjectPointer<HoleRecognizer>(env, javaObject);
-	Mat& mat = *(Mat*) nativeMat;
+	Mat *mat = (Mat*) nativeMat;
 	std::vector<MatchedRegion> matches;
-	holeRecognizer->scan(mat, matches, maxEllipse, maxCovar);
+	holeRecognizer->scan(*mat, matches, maxEllipse, maxCovar);
 	jlongArray result = env->NewLongArray(matches.size());
 	jlong* resultVals = env->GetLongArrayElements(result, 0);
 	for (size_t i = 0; i < matches.size(); i++) {
