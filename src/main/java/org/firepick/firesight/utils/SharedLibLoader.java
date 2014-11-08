@@ -72,10 +72,10 @@ public class SharedLibLoader {
 	private boolean loadFromSystem(String libraryName) {
 		try {
 			System.loadLibrary(libraryName);
+			log.trace("library path: " + System.getProperty("java.library.path"));
 			log.trace("System library loaded for " + libraryName);
 			return true;
 		} catch (final UnsatisfiedLinkError e) {
-			log.trace("library path: " + System.getProperty("java.library.path"));
 			/* Only update the library path and load if the original error indicates it's missing from the library path. */
 			if (!String.format("no %s in java.library.path", libraryName).equals(e.getMessage())) {
 				throw e;

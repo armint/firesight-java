@@ -23,12 +23,12 @@ JNIEXPORT jobjectArray JNICALL Java_org_firepick_firesight_HoughCircle_scan(JNIE
 	Mat& m = *(Mat*) nativeMat;
 	vector<Circle> circles;
 	c->scan(m, circles);
-	jobjectArray array = env->NewObjectArray(circles.size(), env->GetObjectClass(javaObject), 0);
+	jclass clazz = env->FindClass("org/firepick/firesight/Circle");
+	jobjectArray array = env->NewObjectArray(circles.size(), clazz, 0);
 	int index = 0;
 	for (vector<Circle>::iterator i = circles.begin(); i < circles.end(); i++) {
-		jclass cls = env->FindClass("org/firepick/firesight/Circle");
-		jmethodID constructor = env->GetMethodID(cls, "<init>", "(FFF)V");
-		jobject circle = env->NewObject(cls, constructor, i->x, i->y, i->radius);
+		jmethodID constructor = env->GetMethodID(clazz, "<init>", "(FFF)V");
+		jobject circle = env->NewObject(clazz, constructor, i->x, i->y, i->radius);
 		env->SetObjectArrayElement(array, index, circle);
 		index++;
 	}

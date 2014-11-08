@@ -34,9 +34,9 @@ JNIEXPORT void JNICALL Java_org_firepick_firesight_HoleRecognizer__1showMatches
 /*
  * Class:     org_firepick_firesight_HoleRecognizer
  * Method:    scan
- * Signature: (JFF)[J
+ * Signature: (JFF)[Lorg/firepick/firesight/MatchedRegion;
  */
-JNIEXPORT jlongArray JNICALL Java_org_firepick_firesight_HoleRecognizer_scan
+JNIEXPORT jobjectArray JNICALL Java_org_firepick_firesight_HoleRecognizer_scan
   (JNIEnv *, jobject, jlong, jfloat, jfloat);
 
 #ifdef __cplusplus
