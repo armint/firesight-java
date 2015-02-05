@@ -1,6 +1,7 @@
 /Debug/
 /target/
 /log/
-/output.png
+/*.png
+/*.jpg
 /build/
 *~
